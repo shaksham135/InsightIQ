@@ -22,7 +22,11 @@ public class GptService {
     @Value("${groq.model}")
     private String model;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    public GptService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public String generateSummary(String content) {
         String prompt = "Please provide a concise summary of the following content:\n\n" + content;

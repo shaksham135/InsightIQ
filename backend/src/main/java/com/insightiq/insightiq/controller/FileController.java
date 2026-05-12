@@ -33,13 +33,9 @@ public class FileController {
     private GptService gptService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ApiResponse<MediaFile>> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            MediaFile mediaFile = fileService.uploadAndProcessFile(file);
-            return ResponseEntity.ok(ApiResponse.success(mediaFile, "File uploaded and processed successfully"));
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body(ApiResponse.error("Failed to process file: " + e.getMessage()));
-        }
+    public ResponseEntity<ApiResponse<MediaFile>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        MediaFile mediaFile = fileService.uploadAndProcessFile(file);
+        return ResponseEntity.ok(ApiResponse.success(mediaFile, "File uploaded and processed successfully"));
     }
 
     @GetMapping

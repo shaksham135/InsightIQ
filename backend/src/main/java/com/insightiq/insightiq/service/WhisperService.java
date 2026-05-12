@@ -20,7 +20,11 @@ public class WhisperService {
     @Value("${groq.api-key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    public WhisperService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public String transcribe(MultipartFile file) throws IOException {
         String url = "https://api.groq.com/openai/v1/audio/transcriptions";
